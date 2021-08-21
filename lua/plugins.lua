@@ -1,12 +1,7 @@
-local vim = vim
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
--- ensure that packer is installed
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
-    execute 'packadd packer.nvim'
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim' -- ensure that packer is installed
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+    vim.api.nvim_command('packadd packer.nvim')
 end
 
 vim.cmd('packadd packer.nvim')
@@ -17,13 +12,10 @@ packer.init({
   package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack')
 })
 
--- startup and add configure plugins
-packer.startup(function()
+packer.startup(function() -- startup and add configure plugins
   local use = use
-    -- use 'preservim/nerdtree'
     use {'junegunn/fzf', dir = '~/.fzf', run = './install --all'};
     use 'junegunn/fzf.vim'
-    -- use 'Yggdroot/indentLine'
     use 'simrat39/rust-tools.nvim'
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
@@ -47,4 +39,8 @@ packer.startup(function()
       requires = 'kyazdani42/nvim-web-devicons'
     }
     use 'karb94/neoscroll.nvim'
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate'
+    }
 end)
