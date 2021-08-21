@@ -125,35 +125,13 @@ gl.section.left[7] = {
   }
 }
 
--- gl.section.left[8] = {
---   CocStatus = {
---     highlight = {colors.gray, colors.bg},
---     provider = function()
---       return vim.fn['coc#status']()
---         :gsub('\u{274c}', '\u{f06a}')         -- 
---         :gsub('\u{26a0}\u{fe0f}', '\u{f071}') -- 
---     end
---   }
--- }
-
-gl.section.left[9] = {
-  CocFunction = {
-    icon = 'λ ',
-    highlight = {colors.gray, colors.bg},
-    provider = function()
-      local has_func, func_name = pcall(vim.api.nvim_buf_get_var, 0, 'coc_current_function')
-      if not has_func then return '' end
-      return func_name or ''
-    end,
-  }
-}
-
 gl.section.right[1] = {
   FileType = {
     highlight = {colors.gray, colors.bg},
     provider = function()
       local buf = require('galaxyline.provider_buffer')
-      return string.lower(buf.get_buffer_filetype())
+      local language = string.lower(buf.get_buffer_filetype())
+      return language .. ' '
     end,
   }
 }
@@ -161,7 +139,7 @@ gl.section.right[1] = {
 gl.section.right[2] = {
   GitBranch = {
     icon = ' ',
-    separator = '  ',
+    separator = '',
     condition = condition.check_git_workspace,
     highlight = {colors.teal, colors.bg},
     provider = 'GitBranch',
