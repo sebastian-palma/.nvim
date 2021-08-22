@@ -1,6 +1,6 @@
 require('setup.settings')
 
-require('bufferline').setup({})
+require('bufferline').setup{}
 
 require('galaxyline.superhawk610')
 
@@ -17,3 +17,6 @@ require('mappings.movement')
 require('mappings.nvimtree')
 require('mappings.rust')
 require('mappings.telescope')
+require('mappings.terminalmode')
+
+require('toggleterm').setup{}
