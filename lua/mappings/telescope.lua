@@ -1,0 +1,5 @@
+vim.api.nvim_set_keymap('n', '<LEADER>fb', ':Telescope buffers<CR>',     {noremap = true})
+vim.api.nvim_set_keymap('n', '<LEADER>fg', ':Telescope grep_string<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<LEADER>fl', ':Telescope live_grep<CR>',   {noremap = true})
+vim.api.nvim_set_keymap('n', '<LEADER>fp', ':Telescope find_files<CR>',  {noremap = true})
+vim.api.nvim_set_keymap('n', '<LEADER>fn', ':lua require("telescope.builtin").find_files{ cwd = "~/.config/nvim/" }<CR>',  {noremap = true})
