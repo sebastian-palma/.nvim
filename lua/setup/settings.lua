@@ -1,6 +1,7 @@
 vim.cmd [[highlight ColorColumn guibg=#171717]]
 vim.cmd [[set clipboard=unnamedplus]]
 vim.cmd [[set shortmess+=c]]
+vim.cmd [[set undofile]]
 vim.g.mapleader        = ','
 vim.g.vim_json_conceal = 0 -- disable JSON quotes autohide
 vim.o.completeopt      = 'menuone,noinsert,noselect'

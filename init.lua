@@ -11,6 +11,7 @@ require('setup.indentblankline')
 require('setup.plugins')
 require('setup.lspkind')
 
+require('mappings.bufferline')
 require('mappings.general')
 require('mappings.movement')
 require('mappings.nvimtree')
