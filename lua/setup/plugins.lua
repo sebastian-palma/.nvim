@@ -16,7 +16,6 @@ packer.startup(function() -- startup and add configure plugins
 	local use = use
 
 	use 'neovim/nvim-lspconfig'        -- Collection of common configurations for the Nvim LSP client
-	use 'simrat39/rust-tools.nvim'
 	use 'nvim-lua/popup.nvim'
 	use 'nvim-lua/plenary.nvim'
 	use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
@@ -32,5 +31,5 @@ packer.startup(function() -- startup and add configure plugins
 	use 'vim-test/vim-test'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'tversteeg/registers.nvim'
-	-- use 'MaxMEllon/vim-jsx-pretty'
+	use 'dense-analysis/ale'
 end)
