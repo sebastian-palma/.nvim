@@ -1,5 +1,6 @@
 require('setup.settings')
 
+require('setup.folds')
 require('setup.nvimtree')
 require('setup.nvimtreesitter')
 require('setup.theme')

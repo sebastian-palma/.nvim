@@ -28,8 +28,8 @@ packer.startup(function() -- startup and add configure plugins
 	use 'onsails/lspkind-nvim'
 	use 'ruanyl/vim-gh-line'
 	use 'ojroques/vim-oscyank'
-	use 'vim-test/vim-test'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'tversteeg/registers.nvim'
 	use 'dense-analysis/ale'
+	use 'ruanyl/vim-gh-line'
 end)
