@@ -1,7 +1,7 @@
 vim.cmd [[highlight ColorColumn guibg=#171717]]
 vim.cmd [[set clipboard=unnamedplus]]
 vim.cmd [[set shortmess+=c]]
-vim.cmd [[set rnu nu]]
+vim.cmd [[set nu]]
 vim.cmd [[set undofile]]
 vim.cmd [[set noshowmode]]
 vim.cmd [[set foldmethod=manual]]
@@ -9,7 +9,6 @@ vim.cmd [[set ttyfast]]
 vim.cmd [[set lazyredraw]]
 -- vim.cmd [[set shiftwidth=2]]
 vim.cmd [[set re=0]]
-vim.cmd [[let test#strategy = "vtr"]]
 vim.g.mapleader        = ','
 vim.g.vim_json_conceal = 0 -- disable JSON quotes autohide
 vim.o.completeopt      = 'menuone,noinsert,noselect'
