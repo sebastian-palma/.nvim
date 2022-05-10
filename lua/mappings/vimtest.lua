@@ -34,6 +34,18 @@ vim.api.nvim_exec([[
 		silent! execute "!tmux send-keys -t " . tmux_session_window . " '" . a:command . "' ENTER"
 	endfunction
 
+	function! SendToTmux() range
+		let [lnum1, col1] = getpos("'<")[1:2]
+		let [lnum2, col2] = getpos("'>")[1:2]
+		let lines = getline(lnum1, lnum2)         
+		let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+		let lines[0] = lines[0][col1 - 1:]
+		let selectedText = join(lines, "\n")
+		let f = substitute(selectedText, "\n", " ", "g")
+
+		call SilentExecuteTmux(f)
+	endfunction
+
 	function! CreateTmpDirectory()
 		silent! execute "!mkdir -p " . GetTmpDirectory()
 	endfunction
@@ -48,7 +60,7 @@ vim.api.nvim_exec([[
 
 	function! TestCmd()
 		"return "bundle exec rails test "
-		return "bundle exec rspec "
+		return "bundle exec rspec -fp "
 	endfunction
 	" UTILS
 
@@ -91,8 +103,11 @@ vim.api.nvim_exec([[
 
 
 
-	nnoremap <Leader>etd :call ExecuteBinRspecDirectory() <CR>
-	nnoremap <Leader>etf :call ExecuteBinRspecFile()      <CR>
-	nnoremap <Leader>etl :call ExecuteBinRspecLastTestedFile()   <CR>
-	nnoremap <Leader>etn :call ExecuteBinRspecNearest()   <CR>
+	nnoremap <Leader>etd :call ExecuteBinRspecDirectory()      <CR>
+	nnoremap <Leader>etf :call ExecuteBinRspecFile()           <CR>
+	nnoremap <Leader>etl :call ExecuteBinRspecLastTestedFile() <CR>
+	nnoremap <Leader>etn :call ExecuteBinRspecNearest()        <CR>
+
+	command! -range MainSendToTmux call SendToTmux()
+	vnoremap <Leader>stt :<C-U>MainSendToTmux<CR>
 ]], true)

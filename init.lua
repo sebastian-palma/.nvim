@@ -7,6 +7,8 @@ require('setup.indentblankline')
 require('setup.plugins')
 require('setup.lspkind')
 require('setup.fzf')
+require('setup.lightline')
+require('setup.fine-cmdline')
 
 require('mappings.fzf')
 require('mappings.general')

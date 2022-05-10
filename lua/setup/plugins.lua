@@ -31,5 +31,12 @@ packer.startup(function() -- startup and add configure plugins
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'tversteeg/registers.nvim'
 	use 'dense-analysis/ale'
-	use 'ruanyl/vim-gh-line'
+	use 'junegunn/vim-easy-align'
+	use 'slim-template/vim-slim'
+	use {
+	  'VonHeikemen/fine-cmdline.nvim',
+	  requires = {
+	    {'MunifTanjim/nui.nvim'}
+	  }
+	}
 end)

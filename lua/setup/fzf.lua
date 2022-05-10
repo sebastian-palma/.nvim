@@ -1,8 +1,4 @@
 vim.api.nvim_exec([[
-	" use the file full path relative to the current git project
-	" colorscheme ayu_dark
-	let g:lightline = {'colorscheme': 'powerlineish', 'component_function': {'filename': 'LightlineFilename',}}
-
 	function! LightlineFilename()
 		let root = fnamemodify(get(b:, 'git_dir'), ':h')
 	  	let path = expand('%:p')
