@@ -1,6 +1,6 @@
--- vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme "catppuccin-mocha"
 -- vim.cmd.colorscheme "badwolf"
-vim.cmd.colorscheme "cinnabar"
+-- vim.cmd.colorscheme "cinnabar"
 
 vim.api.nvim_set_keymap('n', ',,', ':w<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', ',,', '<Esc>:w<CR>', { noremap = true, silent = true })

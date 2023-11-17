@@ -1,14 +1,14 @@
 local commander = require("commander")
 
 -- [TODO]: update or remove this (see lspsaga equivalent).
-function handle_go_to_definition(result)
-  for _, item in pairs(result["items"]) do
-    -- Open the given file.
-    vim.cmd("vsp " .. item["filename"])
-    -- Move the cursor to the specific line and column where the definition is.
-    vim.cmd(string.format("call cursor(%d, %d)", item["lnum"], item["col"]))
-  end
-end
+-- local function handle_go_to_definition(result)
+--   for _, item in pairs(result["items"]) do
+--     -- Open the given file.
+--     vim.cmd("vsp " .. item["filename"])
+--     -- Move the cursor to the specific line and column where the definition is.
+--     vim.cmd(string.format("call cursor(%d, %d)", item["lnum"], item["col"]))
+--   end
+-- end
 
 -- Wrap the leap function as it's not exposed from the library.
 --
@@ -293,4 +293,3 @@ commander.add(utils, { category = "Utils" })
 
 -- Loading this extension must be after any commander.add() call.
 require("telescope").load_extension("commander")
-

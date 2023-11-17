@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lspconfig.pylsp.setup {
   on_attach = nil,
