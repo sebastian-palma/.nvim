@@ -22,3 +22,6 @@ require("lazy").setup({
 require("setup.general")
 require("setup.commander-nvim")
 require("setup.nvim-lspconfig")
+
+vim.keymap.set('n', '<Char-0xAA>', '<cmd>write<cr>')
+vim.keymap.set('n', '<Char-0xBA>', '<cmd>wl')

@@ -21,4 +21,8 @@ vim.cmd([[autocmd FileType ruby inoremap <C-v> byebug]])
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.wo.wrap = false
 vim.cmd [[set number relativenumber]]
+vim.cmd [[syntax on]]
+vim.cmd [[set undofile]]
+vim.cmd [[set signcolumn=yes]]
