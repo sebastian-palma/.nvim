@@ -6,7 +6,17 @@ return {
   end,
   config = function()
     require("nvim-treesitter.configs").setup({
-      ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "javascript", "toml" },
+      ensure_installed = {
+        "c",
+        "javascript",
+        "lua",
+        "python",
+        "query",
+        "ruby",
+        "toml",
+        "vim",
+        "vimdoc",
+      },
       auto_install = false,
       highlight = { enable = true, additional_vim_regex_highlighting = false },
       incremental_selection = {

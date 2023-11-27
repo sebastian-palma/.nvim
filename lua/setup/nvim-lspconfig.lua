@@ -38,3 +38,5 @@ lspconfig.lua_ls.setup {
     }
   }
 }
+
+lspconfig.solargraph.setup {}
