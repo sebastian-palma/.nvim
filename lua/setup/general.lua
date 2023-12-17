@@ -1,5 +1,5 @@
-vim.cmd.colorscheme "catppuccin-mocha"
--- vim.cmd.colorscheme "badwolf"
+-- vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme "badwolf"
 -- vim.cmd.colorscheme "cinnabar"
 
 vim.api.nvim_set_keymap('n', ',,', ':w<CR>', { noremap = true, silent = true })
@@ -24,8 +24,18 @@ vim.cmd([[autocmd FileType ruby inoremap <C-b> require 'pry-byebug'; binding.pry
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.wo.wrap = false
 vim.cmd [[set number relativenumber]]
 vim.cmd [[syntax on]]
 vim.cmd [[set undofile]]
 vim.cmd [[set signcolumn=yes]]
+vim.cmd [[set cursorline cursorcolumn]]
+vim.cmd [[set nowrap]]
+
+vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-left>', '<C-w>h', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-down>', '<C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-up>', '<C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-right>', '<C-w>l', { noremap = true })
