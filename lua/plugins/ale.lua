@@ -14,7 +14,7 @@ return {
       let g:ale_linters = {
       \ 'ruby': ['brakeman', 'rails_best_practices', 'rubocop'],
       \ 'javascript': ['eslint', 'prettier'],
-      \ 'python': ['ruff']
+      \ 'python': ['djlint', 'ruff']
       \ }
       let g:ale_fixers = {
       \   'css': ['prettier'],
