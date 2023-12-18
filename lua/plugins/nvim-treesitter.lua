@@ -9,6 +9,7 @@ return {
       ensure_installed = {
         "c",
         "htmldjango",
+        "html",
         "javascript",
         "lua",
         "python",
