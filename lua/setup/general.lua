@@ -39,3 +39,7 @@ vim.api.nvim_set_keymap('n', '<C-left>', '<C-w>h', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-down>', '<C-w>j', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-up>', '<C-w>k', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-right>', '<C-w>l', { noremap = true })
+
+-- configure folding through nvim_treesitter
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
