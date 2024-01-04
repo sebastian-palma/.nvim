@@ -34,7 +34,7 @@ return {
 				"html",
 				"lua_ls",
 				"prismals",
-				"pyright",
+				-- "pyright",
 				"svelte",
 				"tailwindcss",
 				"tsserver",
