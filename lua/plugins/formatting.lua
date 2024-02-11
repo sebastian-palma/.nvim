@@ -9,7 +9,7 @@ return {
 			formatters_by_ft = {
 				css = { "prettier" },
 				graphql = { "prettier" },
-				html = { "prettier" },
+				html = {},
 				javascript = { "prettier" },
 				javascriptreact = { "prettier" },
 				json = { "prettier" },
