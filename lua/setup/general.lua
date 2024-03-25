@@ -1,6 +1,5 @@
--- vim.cmd.colorscheme "catppuccin-mocha"
+-- vim.cmd.colorscheme("catppuccin-latte")
 vim.cmd.colorscheme("badwolf")
--- vim.cmd.colorscheme "cinnabar"
 
 vim.api.nvim_set_keymap("n", ",,", ":w<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", ",,", "<esc>:w<cr>", { noremap = true, silent = true })
@@ -20,8 +19,7 @@ vim.api.nvim_set_keymap("n", "*", "*``", { noremap = true })
 
 -- easy debugging snippet
 vim.cmd([[autocmd FileType python inoremap <C-v> import ipdb; ipdb.set_trace()]])
-vim.cmd([[autocmd FileType ruby inoremap <C-v> byebug]])
-vim.cmd([[autocmd FileType ruby inoremap <C-b> require 'pry-byebug'; binding.pry]])
+vim.cmd([[autocmd FileType ruby inoremap <C-v> binding.pry]])
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
