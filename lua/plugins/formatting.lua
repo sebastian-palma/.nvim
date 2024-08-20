@@ -4,9 +4,11 @@ return {
 	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
 	config = function()
 		local current_dir = vim.fn.getcwd()
+		local enabled_formatting = current_dir ~= "/mnt/quipuapp-front"
+			and not string.find(current_dir, "/df_bookmarklet")
 
 		-- Disable auto-formatting for certain projects.
-		if current_dir ~= "/mnt/quipuapp-front" then
+		if enabled_formatting then
 			local conform = require("conform")
 
 			conform.setup({
