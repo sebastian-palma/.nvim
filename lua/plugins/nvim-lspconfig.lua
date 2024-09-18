@@ -8,6 +8,7 @@ return {
 	config = function()
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
+		local util = require("lspconfig/util")
 
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -144,6 +145,23 @@ return {
 							[vim.fn.stdpath("config") .. "/lua"] = true,
 						},
 					},
+				},
+			},
+		})
+
+		lspconfig["gopls"].setup({
+			capabilities = capabilities,
+			cmd = { "gopls" },
+			filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			on_attach = on_attach,
+			root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+			settings = {
+				gopls = {
+					analyses = {
+						unusedparams = true,
+					},
+					completeUnimported = true,
+					usePlaceholders = true,
 				},
 			},
 		})

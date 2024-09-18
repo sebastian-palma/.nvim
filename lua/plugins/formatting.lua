@@ -14,6 +14,7 @@ return {
 			conform.setup({
 				formatters_by_ft = {
 					css = { "prettier" },
+					go = { "gopls" },
 					graphql = { "prettier" },
 					html = {},
 					javascript = { "prettier" },
