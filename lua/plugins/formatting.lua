@@ -4,8 +4,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
 	config = function()
 		local current_dir = vim.fn.getcwd()
-		local enabled_formatting = current_dir ~= "/mnt/quipuapp-front"
-			and not string.find(current_dir, "/df_bookmarklet")
+		local enabled_formatting = not string.find(current_dir, "/df_bookmarklet")
 
 		-- Disable auto-formatting for certain projects.
 		if enabled_formatting then
@@ -17,7 +16,7 @@ return {
 					go = { "gopls" },
 					graphql = { "prettier" },
 					html = {},
-					javascript = { "prettier" },
+					javascript = { "standardjs" },
 					javascriptreact = { "prettier" },
 					json = { "prettier" },
 					lua = { "stylua" },
