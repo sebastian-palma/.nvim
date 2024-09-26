@@ -186,12 +186,12 @@ local telescope = {
 	},
 	{
 		desc = "Search inside current buffer",
-		cmd = "<cmd>Telescope current_buffer_fuzzy_find<cr>",
-		keys = { "n", "<leader>fcf", { noremap = true } },
+		cmd = ":lua require('telescope.builtin').live_grep({ search_dirs = { vim.fn.expand('%:p') } })<cr>",
+		keys = { "n", "<c-F>", { noremap = true } },
 	},
 	{
 		desc = "Search for files (respecting .gitignore)",
-		cmd = "<cmd>Telescope find_files<cr>",
+		cmd = ":lua require('telescope.builtin').find_files({ file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
 		keys = { "n", "<c-p>", { noremap = true } },
 	},
 	{
@@ -201,7 +201,7 @@ local telescope = {
 	},
 	{
 		desc = "Search across the whole project (with args)",
-		cmd = ":lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",
+		cmd = ":lua require('telescope').extensions.live_grep_args.live_grep_args({ file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
 		keys = { "n", "<c-s>", { noremap = true } },
 	},
 	{

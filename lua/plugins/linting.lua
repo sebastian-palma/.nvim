@@ -4,7 +4,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
 	config = function()
 		local lint = require("lint")
-		local eslint = lint.linters.eslint_d
 
 		lint.linters_by_ft = {
 			javascript = { "standardjs" },
@@ -12,17 +11,6 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			python = { "ruff" },
-		}
-
-		eslint.args = {
-			"--no-warn-ignored", -- <-- this is the key argument
-			"--format",
-			"json",
-			"--stdin",
-			"--stdin-filename",
-			function()
-				return vim.api.nvim_buf_get_name(0)
-			end,
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -34,8 +22,24 @@ return {
 			end,
 		})
 
+		-- vim.keymap.set("n", "<leader>l", function()
+		-- 	lint.try_lint()
+		-- end, { desc = "Trigger linting for current file" })
+		function IsNvimDiagnosticsEnabled()
+			local clients = vim.lsp.get_active_clients()
+			for _, client in ipairs(clients) do
+				if client.server_capabilities.diagnosticProvider then
+					return true
+				end
+			end
+			return false
+		end
 		vim.keymap.set("n", "<leader>l", function()
-			lint.try_lint()
-		end, { desc = "Trigger linting for current file" })
+			if IsNvimDiagnosticsEnabled() then
+				vim.diagnostic.enable(0)
+			else
+				vim.diagnostic.disable()
+			end
+		end, { desc = "toggle lint" })
 	end,
 }

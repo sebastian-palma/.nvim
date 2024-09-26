@@ -3,44 +3,51 @@ return {
 	lazy = true,
 	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
 	config = function()
-		local current_dir = vim.fn.getcwd()
-		local enabled_formatting = not string.find(current_dir, "/df_bookmarklet")
+		local conform = require("conform")
 
-		-- Disable auto-formatting for certain projects.
-		if enabled_formatting then
-			local conform = require("conform")
+		conform.setup({
+			formatters_by_ft = {
+				css = { "prettier" },
+				go = { "gopls" },
+				graphql = { "prettier" },
+				html = {},
+				javascript = { "standardjs" },
+				javascriptreact = { "prettier" },
+				json = { "prettier" },
+				lua = { "stylua" },
+				markdown = { "prettier" },
+				python = { "isort", "black" },
+				svelte = { "prettier" },
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
+				yaml = { "prettier" },
+			},
+			format_on_save = function(bufnr)
+				-- Disable with a global or buffer-local variable
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+				return { timeout_ms = 500, lsp_format = "fallback" }
+			end,
+		})
 
-			conform.setup({
-				formatters_by_ft = {
-					css = { "prettier" },
-					go = { "gopls" },
-					graphql = { "prettier" },
-					html = {},
-					javascript = { "standardjs" },
-					javascriptreact = { "prettier" },
-					json = { "prettier" },
-					lua = { "stylua" },
-					markdown = { "prettier" },
-					python = { "isort", "black" },
-					svelte = { "prettier" },
-					typescript = { "prettier" },
-					typescriptreact = { "prettier" },
-					yaml = { "prettier" },
-				},
-				format_on_save = {
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 1000,
-				},
-			})
+		vim.api.nvim_create_user_command("FormatDisable", function(args)
+			if args.bang then
+				-- FormatDisable! will disable formatting just for this buffer
+				vim.b.disable_autoformat = true
+			else
+				vim.g.disable_autoformat = true
+			end
+		end, {
+			desc = "Disable autoformat-on-save",
+			bang = true,
+		})
 
-			vim.keymap.set({ "n", "v" }, "<leader>mp", function()
-				conform.format({
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 1000,
-				})
-			end, { desc = "Format file or range (in visual mode)" })
-		end
+		vim.api.nvim_create_user_command("FormatEnable", function()
+			vim.b.disable_autoformat = false
+			vim.g.disable_autoformat = false
+		end, {
+			desc = "Re-enable autoformat-on-save",
+		})
 	end,
 }
