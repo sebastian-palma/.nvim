@@ -30,7 +30,7 @@ local lspsaga = {
 		cmd = "<cmd>Lspsaga code_action<cr>",
 	},
 	{
-		desc = "LSP rename",
+		desc = "LSP rename symbol",
 		cmd = "<cmd>Lspsaga rename<cr>",
 	},
 	{
@@ -288,7 +288,7 @@ commander.add(rspec, { category = "RSpec" })
 commander.add(rust, { category = "Rust" })
 commander.add(telescope, { category = "Telescope" })
 commander.add(tmux, { category = "TMUX" })
-commander.add(transparent, { category = "Transparent" })
+-- commander.add(transparent, { category = "Transparent" })
 commander.add(trouble, { category = "Trouble" })
 commander.add(utils, { category = "Utils" })
 
