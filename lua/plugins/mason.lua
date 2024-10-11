@@ -27,19 +27,19 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
+				"clojure_lsp",
 				"cssls",
 				"emmet_ls",
 				"gopls",
 				"graphql",
 				"html",
 				"html",
+				"jdtls",
 				"lua_ls",
 				"prismals",
-				-- "pyright",
 				"svelte",
 				"tailwindcss",
 				"ts_ls",
-				"jdtls",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
@@ -48,6 +48,7 @@ return {
 		mason_tool_installer.setup({
 			ensure_installed = {
 				"black", -- python formatter
+				"clojure_lsp", -- python formatter
 				"eslint", -- prettier formatter
 				"eslint_d", -- js linter
 				"isort", -- python formatter

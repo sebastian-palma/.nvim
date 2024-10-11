@@ -9,6 +9,7 @@ return {
 			ensure_installed = {
 				"c",
 				"go",
+				"clojure",
 				"htmldjango",
 				"html",
 				"javascript",
