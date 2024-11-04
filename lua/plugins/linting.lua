@@ -23,11 +23,8 @@ return {
 			end,
 		})
 
-		-- vim.keymap.set("n", "<leader>l", function()
-		-- 	lint.try_lint()
-		-- end, { desc = "Trigger linting for current file" })
 		function IsNvimDiagnosticsEnabled()
-			local clients = vim.lsp.get_active_clients()
+			local clients = vim.lsp.get_clients()
 			for _, client in ipairs(clients) do
 				if client.server_capabilities.diagnosticProvider then
 					return true
@@ -35,12 +32,5 @@ return {
 			end
 			return false
 		end
-		vim.keymap.set("n", "<leader>l", function()
-			if IsNvimDiagnosticsEnabled() then
-				vim.diagnostic.enable(0)
-			else
-				vim.diagnostic.disable()
-			end
-		end, { desc = "toggle lint" })
 	end,
 }

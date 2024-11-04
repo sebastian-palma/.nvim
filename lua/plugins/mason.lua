@@ -28,12 +28,9 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"clojure_lsp",
-				"cssls",
 				"emmet_ls",
 				"gopls",
 				"graphql",
-				"html",
-				"html",
 				"jdtls",
 				"lua_ls",
 				"prismals",
@@ -47,13 +44,11 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"black", -- python formatter
 				"clojure_lsp", -- python formatter
 				"eslint", -- prettier formatter
 				"eslint_d", -- js linter
 				"isort", -- python formatter
 				"prettier", -- prettier formatter
-				"pylint", -- python linter
 				"pyflakes", -- python linter
 				"rubocop", -- python formatter
 				"ruff", -- python formatter

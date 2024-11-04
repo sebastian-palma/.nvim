@@ -14,12 +14,6 @@ function Leap()
 	})
 end
 
-local lazygit = {
-	{
-		desc = "Open Lazygit",
-		cmd = "<cmd>LazyGit<cr>",
-	},
-}
 local lspsaga = {
 	{
 		desc = "LSP finder",
@@ -121,13 +115,6 @@ local symbols_outline = {
 		keys = { "n", "<leader><cr>", { noremap = true } },
 	},
 }
-local rspec = {
-	{
-		desc = "Execute all tests in the current file",
-		cmd = ":call ExecuteBinRspecFile()<cr>",
-		category = "RSpec",
-	},
-}
 local rust = {
 	{
 		desc = "Show all references in quickfix",
@@ -180,11 +167,6 @@ local telescope = {
 		keys = { "n", "<leader>tele", { noremap = true } },
 	},
 	{
-		desc = "Open Telescope Command Center",
-		cmd = "<cmd>Telescope commander<cr>",
-		keys = { "n", "<leader>t", { noremap = true } },
-	},
-	{
 		desc = "Search inside current buffer",
 		cmd = ":lua require('telescope.builtin').live_grep({ search_dirs = { vim.fn.expand('%:p') } })<cr>",
 		keys = { "n", "<c-F>", { noremap = true } },
@@ -210,19 +192,6 @@ local telescope = {
 		keys = { "n", "<c-g>", { noremap = true } },
 	},
 }
-local tmux = {
-	{
-		desc = "Send command to TMUX (right:0)",
-		cmd = ":lua send_to_tmux_pane()<cr>",
-	},
-}
--- Transparency is off. Not a thing anymore.
--- local transparent = {
--- 	{
--- 		desc = "Toggle transparent background",
--- 		cmd = ":TransparentToggle<cr>",
--- 	},
--- }
 local trouble = {
 	{
 		desc = "Trouble workspace diagnostics",
@@ -255,23 +224,17 @@ local trouble = {
 		keys = { "n", "<leader>trl", { noremap = true } },
 	},
 }
-local utils = {
+local lsp = {
 	{
-		desc = "Run the last executed command (right:0)",
-		cmd = ":lua run_last_executed_command()<cr>",
-		keys = { "n", "<leader>rl", { noremap = true } },
+		desc = "Disable linting",
+		cmd = ":lua vim.diagnostic.enable(false)<cr>",
+		keys = { "n", "<leader>def", { noremap = true } },
 	},
-	-- Not implemented. See old dotfiles.
-	-- {
-	-- 	desc = "Choose a window to jump to (vim-choosewin)",
-	-- 	cmd = ":ChooseWin<cr>",
-	-- },
-	-- Leap is not installed.
-	-- {
-	-- 	desc = "Search pattern and jump to match (leap.nvim)",
-	-- 	cmd = ":lua Leap()<cr>",
-	-- 	keys = { "n", "<leader>l", { noremap = true } },
-	-- },
+	{
+		desc = "Enable linting",
+		cmd = ":lua vim.diagnostic.enable(true)<cr>",
+		keys = { "n", "<leader>det", { noremap = true } },
+	},
 }
 
 commander.add({
@@ -281,16 +244,12 @@ commander.add({
 		keys = { "n", "<leader>cc" },
 	},
 })
-commander.add(lazygit, { category = "Git" })
 commander.add(lspsaga, { category = "LSPSaga" })
 commander.add(symbols_outline, { category = "SymbolsOutline" })
-commander.add(rspec, { category = "RSpec" })
 commander.add(rust, { category = "Rust" })
 commander.add(telescope, { category = "Telescope" })
-commander.add(tmux, { category = "TMUX" })
--- commander.add(transparent, { category = "Transparent" })
+commander.add(lsp, { category = "LSP" })
 commander.add(trouble, { category = "Trouble" })
-commander.add(utils, { category = "Utils" })
 
 -- Loading this extension must be after any commander.add() call.
 require("telescope").load_extension("commander")
