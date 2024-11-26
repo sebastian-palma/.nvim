@@ -30,8 +30,6 @@ vim.cmd([[set signcolumn=yes]])
 vim.cmd([[set cursorline cursorcolumn]])
 vim.cmd([[set nowrap]])
 vim.cmd([[set clipboard=unnamed]])
-vim.cmd([[set list]])
-vim.cmd([[set listchars=eol:¬]])
 
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true })

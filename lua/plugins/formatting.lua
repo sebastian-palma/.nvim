@@ -7,7 +7,8 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				clojure = { "cljfmt" },
+				clojure = { "standard-clj" },
+				-- clojure = { "cljfmt" },
 				css = { "prettier" },
 				go = { "gopls" },
 				graphql = { "prettier" },
