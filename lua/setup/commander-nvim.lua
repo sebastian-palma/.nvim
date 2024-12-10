@@ -160,6 +160,49 @@ local rust = {
 		cmd = ":RustRun<cr>",
 	},
 }
+function TelescopeGrepWithHighlight()
+	-- Get the current visual selection or word under cursor
+	local function get_search_term()
+		local mode = vim.fn.mode()
+
+		-- If in visual mode, get the visual selection
+		if mode == "v" or mode == "V" or mode == "" then
+			-- Exit visual mode first
+			vim.cmd('normal! "vy')
+
+			-- Get the visual selection
+			local selection = vim.fn.getreg("v")
+
+			-- Clear the register
+			vim.fn.setreg("v", "")
+
+			return selection
+		else
+			-- If not in visual mode, get the word under cursor
+			-- Use expand with modifiers to get the full word
+			return vim.fn.expand("<cword>")
+		end
+	end
+
+	-- Get the search term
+	local search_term = get_search_term()
+
+	vim.cmd("nohlsearch") -- Clear previous highlights
+	vim.fn.setreg("/", search_term) -- Set search register
+	vim.cmd("set hlsearch") -- Enable highlight search
+
+	-- Open Telescope grep with the selected/cursor term
+	require("telescope.builtin").grep_string({
+		search = search_term,
+		layout_strategy = "vertical",
+		layout_config = {
+			vertical = {
+				prompt_position = "top",
+				mirror = true,
+			},
+		},
+	})
+end
 local telescope = {
 	{
 		desc = "Open Telescope",
@@ -168,27 +211,27 @@ local telescope = {
 	},
 	{
 		desc = "Search inside current buffer",
-		cmd = ":lua require('telescope.builtin').live_grep({ search_dirs = { vim.fn.expand('%:p') } })<cr>",
+		cmd = ":lua require('telescope.builtin').live_grep({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, search_dirs = { vim.fn.expand('%:p') } })<cr>",
 		keys = { "n", "<c-F>", { noremap = true } },
 	},
 	{
 		desc = "Search for files (respecting .gitignore)",
-		cmd = ":lua require('telescope.builtin').find_files({ file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
+		cmd = ":lua require('telescope.builtin').find_files({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
 		keys = { "n", "<c-p>", { noremap = true } },
 	},
 	{
 		desc = "Open buffers list",
-		cmd = "<cmd>Telescope buffers<cr>",
+		cmd = ":lua require('telescope.builtin').buffers({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } } })<cr>",
 		keys = { "n", "<c-b>", { noremap = true } },
 	},
 	{
 		desc = "Search across the whole project (with args)",
-		cmd = ":lua require('telescope').extensions.live_grep_args.live_grep_args({ file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
+		cmd = ":lua require('telescope.builtin').live_grep({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
 		keys = { "n", "<c-s>", { noremap = true } },
 	},
 	{
 		desc = "Search string under cursor on the whole project",
-		cmd = "<cmd>Telescope grep_string<cr>",
+		cmd = ":lua TelescopeGrepWithHighlight()<cr>",
 		keys = { "n", "<c-g>", { noremap = true } },
 	},
 }
