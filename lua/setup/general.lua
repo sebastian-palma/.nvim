@@ -41,3 +41,14 @@ vim.api.nvim_set_keymap("n", "<C-up>", "<C-w>k", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-right>", "<C-w>l", { noremap = true })
 
 vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+-- Save/load folds when closing/opening files.
+vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
+	pattern = { "*.*" },
+	desc = "save view (folds), when closing file",
+	command = "mkview",
+})
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	pattern = { "*.*" },
+	desc = "load view (folds), when opening file",
+	command = "silent! loadview",
+})

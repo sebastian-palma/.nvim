@@ -216,7 +216,8 @@ local telescope = {
 	},
 	{
 		desc = "Search for files (respecting .gitignore)",
-		cmd = ":lua require('telescope.builtin').find_files({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
+		-- cmd = ":lua require('telescope.builtin').find_files({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
+		cmd = ":lua require('telescope.builtin').find_files({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, file_ignore_patterns = { '*.min.js' } })<cr>",
 		keys = { "n", "<c-p>", { noremap = true } },
 	},
 	{
@@ -226,7 +227,8 @@ local telescope = {
 	},
 	{
 		desc = "Search across the whole project (with args)",
-		cmd = ":lua require('telescope.builtin').live_grep({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
+		-- cmd = ":lua require('telescope.builtin').live_grep({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, file_ignore_patterns = { 'public/*', '*.min.js' } })<cr>",
+		cmd = ":lua require('telescope.builtin').live_grep({ layout_strategy = 'vertical', layout_config = { vertical = { prompt_position = 'top', mirror = true } }, file_ignore_patterns = { '*.min.js' } })<cr>",
 		keys = { "n", "<c-s>", { noremap = true } },
 	},
 	{

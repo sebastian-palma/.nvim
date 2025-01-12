@@ -1,1 +1,3 @@
-return { "Olical/conjure" }
+return {
+	"hrsh7th/cmp-nvim-lsp",
+}
