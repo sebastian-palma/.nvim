@@ -6,6 +6,7 @@ return {
 			filetypes = {
 				"clojure",
 				"clojurescript",
+				"fennel",
 			},
 		},
 	},

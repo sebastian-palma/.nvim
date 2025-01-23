@@ -1,15 +1,16 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	version = false,
 	build = function()
 		require("nvim-treesitter.install").update({ with_sync = true })
 	end,
 	config = function()
 		require("nvim-treesitter.configs").setup({
+			auto_install = false,
 			ensure_installed = {
 				"c",
 				"go",
 				"clojure",
+				"fennel",
 				"htmldjango",
 				"html",
 				"javascript",
@@ -21,8 +22,10 @@ return {
 				"vim",
 				"vimdoc",
 			},
-			auto_install = false,
-			highlight = { enable = true, additional_vim_regex_highlighting = false },
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+			},
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -32,6 +35,11 @@ return {
 					node_decremental = "<C-m>",
 				},
 			},
+			indent = {
+				enable = true,
+			},
 		})
 	end,
+	event = { "BufReadPre", "BufNewFile" },
+	version = false,
 }

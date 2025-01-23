@@ -1,4 +1,5 @@
 return {
+	-- dir = "/Users/seb/code/neovim/conform.nvim",
 	"stevearc/conform.nvim",
 	lazy = true,
 	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
