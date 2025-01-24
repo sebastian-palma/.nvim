@@ -5,12 +5,8 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
-		-- import mason
 		local mason = require("mason")
-
-		-- import mason-lspconfig
 		local mason_lspconfig = require("mason-lspconfig")
-
 		local mason_tool_installer = require("mason-tool-installer")
 
 		-- enable mason and configure icons
@@ -29,14 +25,15 @@ return {
 			ensure_installed = {
 				"clojure_lsp",
 				"emmet_ls",
-				"gopls",
-				"graphql",
+				-- "gopls",
+				-- "graphql",
 				"jdtls",
 				"lua_ls",
-				"prismals",
-				"svelte",
+				-- "prismals",
+				"ruby_lsp",
+				-- "svelte",
 				"tailwindcss",
-				"ts_ls",
+				-- "ts_ls",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
@@ -50,7 +47,7 @@ return {
 				"isort", -- python formatter
 				"prettier", -- prettier formatter
 				"pyflakes", -- python linter
-				"rubocop", -- python formatter
+				"standardrb", -- python formatter
 				"ruff", -- python formatter
 				"stylua", -- lua formatter
 			},

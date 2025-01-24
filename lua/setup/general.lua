@@ -201,7 +201,11 @@ local function send_eval_request(args)
 	while true do
 		local chunk, status, partial = client:receive(1024)
 
-		print(vim.inspect({ chunk = chunk, decoded = bdecode(chunk) }))
+		if chunk then
+			print(vim.inspect({ status = status, chunk = chunk, decoded = bdecode(chunk) }))
+		else
+			print(vim.inspect({ status = status, chunk = chunk }))
+		end
 
 		if chunk then
 			response = response .. chunk

@@ -9,10 +9,7 @@ return {
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 		local util = require("lspconfig/util")
-
-		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 		local keymap = vim.keymap -- for conciseness
 
 		local opts = { noremap = true, silent = true }
@@ -70,6 +67,13 @@ return {
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
+
+		lspconfig.ruby_lsp.setup({
+			init_options = {
+				formatter = "standard",
+				linters = { "standard" },
+			},
+		})
 
 		-- configure clojure server
 		lspconfig["clojure_lsp"].setup({
