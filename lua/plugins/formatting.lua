@@ -11,6 +11,7 @@ return {
 				clojure = { "standard-clj" },
 				-- clojure = { "cljfmt" },
 				css = { "prettier" },
+				fennel = { "fnlfmt" },
 				go = { "gopls" },
 				graphql = { "prettier" },
 				html = {},

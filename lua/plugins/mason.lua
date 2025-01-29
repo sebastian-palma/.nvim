@@ -25,6 +25,7 @@ return {
 			ensure_installed = {
 				"clojure_lsp",
 				"emmet_ls",
+				"fennel_language_server",
 				-- "gopls",
 				-- "graphql",
 				"jdtls",
