@@ -68,6 +68,42 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		-- fennel-ls does not seem to recognize globals
+		-- lspconfig.fennel_ls.setup({
+		-- 	settings = {
+		-- 		fennel = {
+		-- 			workspace = {
+		-- 				library = vim.api.nvim_list_runtime_paths(),
+		-- 			},
+		-- 			diagnostics = {
+		-- 				globals = { "vim" },
+		-- 			},
+		-- 		},
+		-- 	},
+		-- })
+		lspconfig.fennel_language_server.setup({
+			-- default_config = {
+			-- 	-- replace it with true path
+			-- 	cmd = { "/PATH/TO/BINFILE" },
+			-- 	filetypes = { "fennel" },
+			-- 	single_file_support = true,
+			-- 	-- source code resides in directory `fnl/`
+			-- 	root_dir = lspconfig.util.root_pattern("fnl"),
+			settings = {
+				fennel = {
+					workspace = {
+						-- If you are using hotpot.nvim or aniseed,
+						-- make the server aware of neovim runtime files.
+						library = vim.api.nvim_list_runtime_paths(),
+					},
+					diagnostics = {
+						globals = { "vim" },
+					},
+				},
+			},
+			-- },
+		})
+
 		lspconfig.ruby_lsp.setup({
 			init_options = {
 				formatter = "standard",
