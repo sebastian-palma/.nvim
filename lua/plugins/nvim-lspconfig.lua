@@ -69,40 +69,7 @@ return {
 		end
 
 		-- fennel-ls does not seem to recognize globals
-		-- lspconfig.fennel_ls.setup({
-		-- 	settings = {
-		-- 		fennel = {
-		-- 			workspace = {
-		-- 				library = vim.api.nvim_list_runtime_paths(),
-		-- 			},
-		-- 			diagnostics = {
-		-- 				globals = { "vim" },
-		-- 			},
-		-- 		},
-		-- 	},
-		-- })
-		lspconfig.fennel_language_server.setup({
-			-- default_config = {
-			-- 	-- replace it with true path
-			-- 	cmd = { "/PATH/TO/BINFILE" },
-			-- 	filetypes = { "fennel" },
-			-- 	single_file_support = true,
-			-- 	-- source code resides in directory `fnl/`
-			-- 	root_dir = lspconfig.util.root_pattern("fnl"),
-			settings = {
-				fennel = {
-					workspace = {
-						-- If you are using hotpot.nvim or aniseed,
-						-- make the server aware of neovim runtime files.
-						library = vim.api.nvim_list_runtime_paths(),
-					},
-					diagnostics = {
-						globals = { "vim" },
-					},
-				},
-			},
-			-- },
-		})
+		lspconfig.fennel_ls.setup({})
 
 		lspconfig.ruby_lsp.setup({
 			init_options = {
@@ -129,36 +96,10 @@ return {
 			on_attach = on_attach,
 		})
 
-		-- configure css server
-		-- lspconfig["cssls"].setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- })
-
-		-- configure tailwindcss server
-		lspconfig["tailwindcss"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-
 		-- configure prisma orm server
 		lspconfig["prismals"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-		})
-
-		-- configure graphql language server
-		lspconfig["graphql"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-		})
-
-		-- configure emmet language server
-		lspconfig["emmet_ls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 		})
 
 		-- configure ruff_lsp language server
@@ -167,12 +108,6 @@ return {
 			on_attach = on_attach,
 			filetypes = { "python" },
 		})
-
-		-- configure python server
-		-- lspconfig["pyright"].setup({
-		--   capabilities = capabilities,
-		--   on_attach = on_attach,
-		-- })
 
 		-- configure lua server (with special settings)
 		lspconfig["lua_ls"].setup({
@@ -208,6 +143,32 @@ return {
 					},
 					completeUnimported = true,
 					usePlaceholders = true,
+				},
+			},
+		})
+
+		lspconfig["dartls"].setup({
+			on_attach = on_attach,
+			capabilities = capabilities,
+			cmd = {
+				"dart",
+				"language-server",
+				"--protocol=lsp",
+			},
+			filetypes = { "dart" },
+			init_options = {
+				onlyAnalyzeProjectsWithOpenFiles = false,
+				suggestFromUnimportedLibraries = true,
+				closingLabels = true,
+				outline = false,
+				flutterOutline = false,
+			},
+			settings = {
+				dart = {
+					analysisExcludedFolders = {},
+					updateImportsOnRename = true,
+					completeFunctionCalls = true,
+					showTodos = true,
 				},
 			},
 		})

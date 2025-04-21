@@ -4,15 +4,21 @@ return {
 	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
 	config = function()
 		local lint = require("lint")
+    local df = "/df"
 
 		lint.linters_by_ft = {
 			clojure = { "clj-kondo" },
-			javascript = { "standardjs" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
 			python = { "ruff" },
 		}
+
+    -- Configure linters per project.
+		if vim.fn.getcwd():sub(-#df) == df then
+			lint.linters_by_ft.javascript = { "eslint_d" }
+			lint.linters_by_ft.javascriptreact = { "eslint_d" }
+		else
+			lint.linters_by_ft.javascript = { "standardjs" }
+			lint.linters_by_ft.javascriptreact = { "standardjs" }
+		end
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 

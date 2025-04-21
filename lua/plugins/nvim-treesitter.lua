@@ -7,6 +7,7 @@ return {
 		require("nvim-treesitter.configs").setup({
 			auto_install = false,
 			ensure_installed = {
+				"dart",
 				"c",
 				"go",
 				"clojure",
@@ -29,10 +30,10 @@ return {
 			incremental_selection = {
 				enable = true,
 				keymaps = {
-					init_selection = "<C-n>",
-					node_incremental = "<C-n>",
-					scope_incremental = "<C-s>",
-					node_decremental = "<C-m>",
+					init_selection = "<C-space>",
+					node_incremental = "<C-space>",
+					scope_incremental = false,
+					node_decremental = "<bs>",
 				},
 			},
 			indent = {
@@ -40,6 +41,9 @@ return {
 			},
 		})
 	end,
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-textobjects",
+	},
 	event = { "BufReadPre", "BufNewFile" },
 	version = false,
 }

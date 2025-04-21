@@ -24,12 +24,11 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"clojure_lsp",
-				"emmet_ls",
-				"fennel_ls",
+				-- "emmet_ls",
 				"jdtls",
 				"lua_ls",
 				-- "ruby_lsp",
-				"tailwindcss",
+				-- "tailwindcss",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
@@ -40,7 +39,6 @@ return {
 				"clojure_lsp", -- python formatter
 				"eslint", -- prettier formatter
 				"eslint_d", -- js linter
-				"fennel_ls", -- js linter
 				"isort", -- python formatter
 				"prettier", -- prettier formatter
 				"pyflakes", -- python linter

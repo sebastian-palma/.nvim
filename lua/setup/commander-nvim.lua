@@ -47,12 +47,12 @@ local lspsaga = {
 	{
 		desc = "LSP go to definition (split)",
 		cmd = ":split | lua vim.lsp.buf.definition()<cr>",
-		keys = { "n", "<leader>gtv", { noremap = true } },
+		keys = { "n", "<leader>gts", { noremap = true } },
 	},
 	{
 		desc = "LSP go to definition (same buffer)",
 		cmd = "<cmd>Lspsaga goto_definition<cr>",
-		keys = { "n", "<leader>gts", { noremap = true } },
+		keys = { "n", "<leader>gt", { noremap = true } },
 	},
 	{
 		desc = "LSP peek type definition",
