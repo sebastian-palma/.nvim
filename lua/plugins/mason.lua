@@ -25,10 +25,10 @@ return {
 			ensure_installed = {
 				"clojure_lsp",
 				-- "emmet_ls",
-				"jdtls",
+				-- "jdtls",
 				"lua_ls",
-				-- "ruby_lsp",
-				-- "tailwindcss",
+				"ruby_lsp",
+				"tailwindcss",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed

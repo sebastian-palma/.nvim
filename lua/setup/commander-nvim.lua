@@ -283,6 +283,13 @@ local lsp = {
 		keys = { "n", "<leader>det", { noremap = true } },
 	},
 }
+local leap = {
+	{
+		desc = "Leap (general-purpose motion plugin for Neovim)",
+		cmd = "<Plug>(leap-anywhere)",
+		keys = { "n", "S", { noremap = true } },
+	},
+}
 
 commander.add({
 	{
@@ -294,8 +301,9 @@ commander.add({
 commander.add(lspsaga, { category = "LSPSaga" })
 commander.add(symbols_outline, { category = "SymbolsOutline" })
 commander.add(rust, { category = "Rust" })
-commander.add(telescope, { category = "Telescope" })
+commander.add(leap, { category = "Trouble" })
 commander.add(lsp, { category = "LSP" })
+commander.add(telescope, { category = "Telescope" })
 commander.add(trouble, { category = "Trouble" })
 
 -- Loading this extension must be after any commander.add() call.
