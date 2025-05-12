@@ -3,16 +3,31 @@ return {
 	config = function()
 		-- Utilities for creating configurations
 		local util = require("formatter.util")
-    local javascript = require("formatter.filetypes.javascript")
-    local javascript_formatter = {}
-    local df = "/df"
+		local javascript = require("formatter.filetypes.javascript")
 
-    -- Configure formatters per project.
-    if vim.fn.getcwd():sub(-#df) == df then
-      table.insert(javascript_formatter, javascript.eslint_d)
-    else
-      table.insert(javascript_formatter, javascript.standard)
-    end
+		-- Unlike the rest, this wraps "erb-formatter" in a custom function
+		-- so we can pass --print-width when invoking the executable.
+		local erbformatter = function()
+			return {
+				exe = "erb-formatter",
+				args = { util.escape_path(util.get_current_buffer_file_path()), "--print-width", "1000" },
+				stdin = true,
+			}
+		end
+
+		local javascript_formatter = function()
+			local cwd = vim.fn.getcwd()
+			local df = "/df"
+			local glbtosvg = "/3d-glbtosvg"
+
+			if cwd:sub(-#df) == df then
+				return javascript.eslint_d
+			elseif cwd:sub(-#glbtosvg) == glbtosvg then
+				return javascript.prettier
+			else
+				return javascript.standard
+			end
+		end
 
 		-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 		require("formatter").setup({
@@ -57,10 +72,12 @@ return {
 				},
 
 				eruby = {
-					require("formatter.filetypes.eruby").erbformatter,
+					erbformatter,
 				},
 
-				javascript = javascript_formatter,
+				javascript = {
+          javascript_formatter()
+        },
 
 				ruby = {
 					require("formatter.filetypes.ruby").standardrb,

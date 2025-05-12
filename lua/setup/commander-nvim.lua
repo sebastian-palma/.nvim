@@ -283,12 +283,19 @@ local lsp = {
 		keys = { "n", "<leader>det", { noremap = true } },
 	},
 }
-local leap = {
-	{
-		desc = "Leap (general-purpose motion plugin for Neovim)",
-		cmd = "<Plug>(leap-anywhere)",
-		keys = { "n", "S", { noremap = true } },
-	},
+-- local leap = {
+-- 	{
+-- 		desc = "Leap (general-purpose motion plugin for Neovim)",
+-- 		cmd = "<Plug>(leap-anywhere)",
+-- 		keys = { "n", "S", { noremap = true } },
+-- 	},
+-- }
+local flash = {
+  {
+    desc = "Initialize flash with the word under the cursor",
+    cmd = ":lua require('flash').jump({ pattern = vim.fn.expand('<cword>') })<cr>",
+    keys = { "n", "<leader>/", { noremap = true } }
+  }
 }
 
 commander.add({
@@ -301,7 +308,8 @@ commander.add({
 commander.add(lspsaga, { category = "LSPSaga" })
 commander.add(symbols_outline, { category = "SymbolsOutline" })
 commander.add(rust, { category = "Rust" })
-commander.add(leap, { category = "Trouble" })
+-- commander.add(leap, { category = "Trouble" }) -- Leap is disable for the moment as it messes with vim-sexp
+commander.add(flash, { category = "Flash" })
 commander.add(lsp, { category = "LSP" })
 commander.add(telescope, { category = "Telescope" })
 commander.add(trouble, { category = "Trouble" })

@@ -1,4 +1,3 @@
--- vim.cmd.colorscheme("catppuccin-latte")
 -- vim.cmd.colorscheme("badwolf")
 
 vim.api.nvim_set_keymap("n", ",,", ":w<cr>", { noremap = true, silent = true })
@@ -32,6 +31,7 @@ vim.cmd([[set signcolumn=yes]])
 vim.cmd([[set cursorline cursorcolumn]])
 vim.cmd([[set nowrap]])
 vim.cmd([[set clipboard=unnamed]])
+vim.cmd([[set foldmethod=manual]])
 
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true })

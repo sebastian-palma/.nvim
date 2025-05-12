@@ -1,3 +1,3 @@
 return {
-	"sebastian-palma/badwolf",
+	-- "sebastian-palma/badwolf",
 }
