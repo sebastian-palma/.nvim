@@ -63,3 +63,6 @@ vim.api.nvim_set_keymap("n", "<S-Left>", "gT", { noremap = true, silent = true }
 -- Navigate quickfix elements.
 vim.api.nvim_set_keymap("n", "<leader>cn", ":cn<enter>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>cp", ":cp<enter>", { noremap = true, silent = true })
+
+-- Renders linter messages as virtual text, otherwise you see only the gutter.
+vim.diagnostic.config({virtual_text = true})

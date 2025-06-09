@@ -10,7 +10,7 @@ return {
 		local erbformatter = function()
 			return {
 				exe = "erb-formatter",
-				args = { util.escape_path(util.get_current_buffer_file_path()), "--print-width", "1000" },
+				args = { util.escape_path(util.get_current_buffer_file_path()), "--print-width", "100" },
 				stdin = true,
 			}
 		end

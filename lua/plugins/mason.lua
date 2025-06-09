@@ -27,7 +27,7 @@ return {
 				-- "emmet_ls",
 				-- "jdtls",
 				"lua_ls",
-				"ruby_lsp",
+				-- "ruby_lsp",
 				"tailwindcss",
 			},
 			-- auto-install configured servers (with lspconfig)
