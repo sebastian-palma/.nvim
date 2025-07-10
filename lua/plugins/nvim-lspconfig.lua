@@ -71,7 +71,7 @@ return {
 		-- fennel-ls does not seem to recognize globals
 		lspconfig.fennel_ls.setup({})
 
-		lspconfig.ruby_lsp.setup({
+    lspconfig.ruby_lsp.setup({
 			init_options = {
 				formatter = "standard",
 				linters = { "standard" },

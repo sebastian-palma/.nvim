@@ -9,6 +9,7 @@ return {
 		lint.linters_by_ft = {
 			clojure = { "clj-kondo" },
 			python = { "ruff" },
+      ruby = { "standardrb" }
 		}
 
     -- Configure linters per project.

@@ -1,5 +1,3 @@
--- vim.cmd.colorscheme("badwolf")
-
 vim.api.nvim_set_keymap("n", ",,", ":w<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", ",,", "<esc>:w<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader><space>", ":NvimTreeToggle<CR>", { noremap = true })
@@ -66,3 +64,12 @@ vim.api.nvim_set_keymap("n", "<leader>cp", ":cp<enter>", { noremap = true, silen
 
 -- Renders linter messages as virtual text, otherwise you see only the gutter.
 vim.diagnostic.config({virtual_text = true})
+
+-- EasyAlign Clojure mappings
+-- vim.cmd([[
+--   nnoremap <buffer> <leader>a[ vi[<c-v>$:EasyAlign\ g/^\S/<cr>gv=
+--   nnoremap <buffer> <leader>a{ vi{<c-v>$:EasyAlign\ g/^\S/<cr>gv=
+-- ]])
+
+vim.api.nvim_set_keymap('n', '<leader>a[', 'vi[<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>a{', 'vi{<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=', { noremap = true, silent = true })

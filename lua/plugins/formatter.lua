@@ -79,6 +79,10 @@ return {
           javascript_formatter()
         },
 
+				python = {
+					require("formatter.filetypes.python").ruff,
+				},
+
 				ruby = {
 					require("formatter.filetypes.ruby").standardrb,
 				},

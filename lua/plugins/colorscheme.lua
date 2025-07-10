@@ -1,3 +1,0 @@
-return {
-	-- "sebastian-palma/badwolf",
-}
