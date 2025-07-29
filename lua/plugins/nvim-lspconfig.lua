@@ -72,10 +72,15 @@ return {
 		lspconfig.fennel_ls.setup({})
 
     lspconfig.ruby_lsp.setup({
-			init_options = {
-				formatter = "standard",
-				linters = { "standard" },
-			},
+      init_options = {
+        addonSettings = {
+          ["Ruby LSP Rails"] = {
+            enablePendingMigrationsPrompt = false,
+          },
+        },
+        formatter = "standard",
+        linters = { "standard" },
+      },
 		})
 
 		-- configure clojure server

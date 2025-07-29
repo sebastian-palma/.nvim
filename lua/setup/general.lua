@@ -71,5 +71,6 @@ vim.diagnostic.config({virtual_text = true})
 --   nnoremap <buffer> <leader>a{ vi{<c-v>$:EasyAlign\ g/^\S/<cr>gv=
 -- ]])
 
+-- EasyAlign mappings for Lisp.
 vim.api.nvim_set_keymap('n', '<leader>a[', 'vi[<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>a{', 'vi{<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=', { noremap = true, silent = true })
