@@ -29,7 +29,9 @@ vim.cmd([[set signcolumn=yes]])
 vim.cmd([[set cursorline cursorcolumn]])
 vim.cmd([[set nowrap]])
 vim.cmd([[set clipboard=unnamed]])
-vim.cmd([[set foldmethod=manual]])
+
+vim.opt.foldmethod = "manual"
+vim.opt.viewoptions = "folds,cursor"
 
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true })
@@ -42,18 +44,6 @@ vim.api.nvim_set_keymap("n", "<C-right>", "<C-w>l", { noremap = true })
 
 vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
--- Save/load folds when closing/opening files.
-vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
-	pattern = { "*.*" },
-	desc = "save view (folds), when closing file",
-	command = "mkview",
-})
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	pattern = { "*.*" },
-	desc = "load view (folds), when opening file",
-	command = "silent! loadview",
-})
-
 -- Navigate tabs using shift plus arrows.
 vim.api.nvim_set_keymap("n", "<S-Right>", "gt", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-Left>", "gT", { noremap = true, silent = true })
@@ -65,12 +55,17 @@ vim.api.nvim_set_keymap("n", "<leader>cp", ":cp<enter>", { noremap = true, silen
 -- Renders linter messages as virtual text, otherwise you see only the gutter.
 vim.diagnostic.config({virtual_text = true})
 
--- EasyAlign Clojure mappings
--- vim.cmd([[
---   nnoremap <buffer> <leader>a[ vi[<c-v>$:EasyAlign\ g/^\S/<cr>gv=
---   nnoremap <buffer> <leader>a{ vi{<c-v>$:EasyAlign\ g/^\S/<cr>gv=
--- ]])
-
 -- EasyAlign mappings for Lisp.
 vim.api.nvim_set_keymap('n', '<leader>a[', 'vi[<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>a{', 'vi{<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=', { noremap = true, silent = true })
+
+vim.api.nvim_create_autocmd({ "BufUnload", "BufWinLeave" }, {
+  pattern = "?*",  -- ?* = named files only, avoids errors on scratch buffers
+  command = "silent! mkview",
+})
+
+-- Restore view: covers :e! (BufReadPost) and entering windows (BufWinEnter)
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufWinEnter" }, {
+  pattern = "?*",
+  command = "silent! loadview",
+})

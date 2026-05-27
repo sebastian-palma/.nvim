@@ -22,4 +22,3 @@ require("lazy").setup({
 
 require("setup.general")
 require("setup.commander-nvim")
--- require("setup.nvim-lspconfig")
