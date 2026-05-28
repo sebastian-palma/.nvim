@@ -61,7 +61,6 @@ return {
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
@@ -177,5 +176,12 @@ return {
 				},
 			},
 		})
+
+    vim.lsp.config("clangd", {
+      cmd = { "docker", "exec", "-i", "df-compressor", "clangd", "--clang-tidy" },
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
+    vim.lsp.enable("clangd")
 	end,
 }

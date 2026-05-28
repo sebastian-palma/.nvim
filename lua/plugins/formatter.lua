@@ -31,72 +31,80 @@ return {
 
 		-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 		require("formatter").setup({
-			-- Enable or disable logging
 			logging = true,
-			-- Set the log level
 			log_level = vim.log.levels.INFO,
-			-- All formatter configurations are opt-in
-			filetype = {
-				-- Formatter configurations for filetype "lua" go here
-				-- and will be executed in order
-				lua = {
-					-- "formatter.filetypes.lua" defines default configurations for the
-					-- "lua" filetype
-					require("formatter.filetypes.lua").stylua,
 
-					-- You can also define your own configuration
-					function()
-						-- Supports conditional formatting
-						if util.get_current_buffer_file_name() == "special.lua" then
-							return nil
-						end
+      filetype = {
+        c = {
+          require("formatter.filetypes.c").clangformat,
+        },
 
-						-- Full specification of configurations is down below and in Vim help
-						-- files
-						return {
-							exe = "stylua",
-							args = {
-								"--search-parent-directories",
-								"--stdin-filepath",
-								util.escape_path(util.get_current_buffer_file_path()),
-								"--",
-								"-",
-							},
-							stdin = true,
-						}
-					end,
-				},
+        cpp = {
+          require("formatter.filetypes.c").clangformat,
+        },
 
-				dart = {
-					require("formatter.filetypes.dart").dartformat,
-				},
+        lua = {
+          require("formatter.filetypes.lua").stylua,
 
-				eruby = {
-					erbformatter,
-				},
+          -- You can also define your own configuration
+          function()
+            -- Supports conditional formatting
+            if util.get_current_buffer_file_name() == "special.lua" then
+              return nil
+            end
 
-				javascript = {
+            -- Full specification of configurations is down below and in Vim help
+            -- files
+            return {
+              exe = "stylua",
+              args = {
+                "--search-parent-directories",
+                "--stdin-filepath",
+                util.escape_path(util.get_current_buffer_file_path()),
+                "--",
+                "-",
+              },
+              stdin = true,
+            }
+          end,
+        },
+
+        dart = {
+          require("formatter.filetypes.dart").dartformat,
+        },
+
+        eruby = {
+          erbformatter,
+        },
+
+        javascript = {
           javascript_formatter()
         },
 
-				python = {
-					require("formatter.filetypes.python").ruff,
-				},
+        python = {
+          require("formatter.filetypes.python").ruff,
+        },
 
-				ruby = {
-					require("formatter.filetypes.ruby").standardrb,
-				},
+        ruby = {
+          require("formatter.filetypes.ruby").standardrb,
+        },
 
-				-- Use the special "*" filetype for defining formatter configurations on
-				-- any filetype
-				["*"] = {
-					-- "formatter.filetypes.any" defines default configurations for any
-					-- filetype
-					require("formatter.filetypes.any").remove_trailing_whitespace,
-					-- Remove trailing whitespace without 'sed'
-					-- require("formatter.filetypes.any").substitute_trailing_whitespace,
-				},
-			},
+        -- Use the special "*" filetype for defining formatter configurations on
+        -- any filetype
+        ["*"] = {
+          -- "formatter.filetypes.any" defines default configurations for any
+          -- filetype
+          require("formatter.filetypes.any").remove_trailing_whitespace,
+          -- Remove trailing whitespace without 'sed'
+          -- require("formatter.filetypes.any").substitute_trailing_whitespace,
+        },
+      },
+		})
+
+		vim.api.nvim_create_autocmd("BufWritePost", {
+			callback = function()
+				vim.cmd("FormatWrite")
+			end,
 		})
 	end,
 }
