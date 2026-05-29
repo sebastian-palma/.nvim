@@ -1,3 +1,3 @@
 return {
-  "ojroques/vim-oscyank"
+  "ojroques/vim-oscyank",
 }

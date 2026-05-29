@@ -1,4 +1,4 @@
 return {
-	"m15a/vim-fennel-syntax",
-	-- "atweiden/vim-fennel",
+  "m15a/vim-fennel-syntax",
+  -- "atweiden/vim-fennel",
 }

@@ -1,4 +1,4 @@
 return {
   "hrsh7th/vim-vsnip",
-  dependencies = { "hrsh7th/vim-vsnip-integ" }
+  dependencies = { "hrsh7th/vim-vsnip-integ" },
 }

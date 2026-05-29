@@ -1,3 +1,3 @@
 return {
-	"Olical/nfnl",
+  "Olical/nfnl",
 }

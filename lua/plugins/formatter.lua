@@ -1,112 +1,112 @@
 return {
-	"mhartington/formatter.nvim",
-	config = function()
-		-- Utilities for creating configurations
-		local util = require("formatter.util")
-		local javascript = require("formatter.filetypes.javascript")
+  "mhartington/formatter.nvim",
+  config = function()
+    -- Utilities for creating configurations
+    local util = require("formatter.util")
+    local javascript = require("formatter.filetypes.javascript")
 
-		-- Unlike the rest, this wraps "erb-formatter" in a custom function
-		-- so we can pass --print-width when invoking the executable.
-		local erbformatter = function()
-			return {
-				exe = "erb-formatter",
-				args = { util.escape_path(util.get_current_buffer_file_path()), "--print-width", "100" },
-				stdin = true,
-			}
-		end
+    -- Unlike the rest, this wraps "erb-formatter" in a custom function
+    -- so we can pass --print-width when invoking the executable.
+    local erbformatter = function()
+      return {
+        exe = "erb-formatter",
+        args = { util.escape_path(util.get_current_buffer_file_path()), "--print-width", "100" },
+        stdin = true,
+      }
+    end
 
-		local javascript_formatter = function()
-			local cwd = vim.fn.getcwd()
-			local df = "/df"
-			local glbtosvg = "/3d-glbtosvg"
+    local javascript_formatter = function()
+      local cwd = vim.fn.getcwd()
+      local df = "/df"
+      local glbtosvg = "/3d-glbtosvg"
 
-			if cwd:sub(-#df) == df then
-				return javascript.eslint_d
-			elseif cwd:sub(-#glbtosvg) == glbtosvg then
-				return javascript.prettier
-			else
-				return javascript.standard
-			end
-		end
+      if cwd:sub(-#df) == df then
+        return javascript.eslint_d
+      elseif cwd:sub(-#glbtosvg) == glbtosvg then
+        return javascript.prettier
+      else
+        return javascript.standard
+      end
+    end
 
-		-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
-		require("formatter").setup({
-			logging = true,
-			log_level = vim.log.levels.INFO,
+    -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
+    require("formatter").setup({
+      logging = true,
+      log_level = vim.log.levels.INFO,
 
-			filetype = {
-				c = {
-					require("formatter.filetypes.c").clangformat,
-				},
+      filetype = {
+        c = {
+          require("formatter.filetypes.c").clangformat,
+        },
 
-				cpp = {
-					require("formatter.filetypes.c").clangformat,
-				},
+        cpp = {
+          require("formatter.filetypes.c").clangformat,
+        },
 
-				lua = {
-					require("formatter.filetypes.lua").stylua,
+        lua = {
+          require("formatter.filetypes.lua").stylua,
 
-					-- You can also define your own configuration
-					function()
-						-- Supports conditional formatting
-						if util.get_current_buffer_file_name() == "special.lua" then
-							return nil
-						end
+          -- You can also define your own configuration
+          function()
+            -- Supports conditional formatting
+            if util.get_current_buffer_file_name() == "special.lua" then
+              return nil
+            end
 
-						-- Full specification of configurations is down below and in Vim help
-						-- files
-						return {
-							exe = "stylua",
-							args = {
-								"--search-parent-directories",
-								"--stdin-filepath",
-								util.escape_path(util.get_current_buffer_file_path()),
-								"--",
-								"-",
-							},
-							stdin = true,
-						}
-					end,
-				},
+            -- Full specification of configurations is down below and in Vim help
+            -- files
+            return {
+              exe = "stylua",
+              args = {
+                "--search-parent-directories",
+                "--stdin-filepath",
+                util.escape_path(util.get_current_buffer_file_path()),
+                "--",
+                "-",
+              },
+              stdin = true,
+            }
+          end,
+        },
 
-				dart = {
-					require("formatter.filetypes.dart").dartformat,
-				},
+        dart = {
+          require("formatter.filetypes.dart").dartformat,
+        },
 
-				eruby = {
-					erbformatter,
-				},
+        eruby = {
+          erbformatter,
+        },
 
-				javascript = {
-					javascript_formatter(),
-				},
+        javascript = {
+          javascript_formatter(),
+        },
 
-				python = {
-					require("formatter.filetypes.python").ruff,
-				},
+        python = {
+          require("formatter.filetypes.python").ruff,
+        },
 
-				ruby = {
-					require("formatter.filetypes.ruby").standardrb,
-				},
+        ruby = {
+          require("formatter.filetypes.ruby").standardrb,
+        },
 
-				-- Use the special "*" filetype for defining formatter configurations on
-				-- any filetype
-				["*"] = {
-					-- "formatter.filetypes.any" defines default configurations for any
-					-- filetype
-					require("formatter.filetypes.any").remove_trailing_whitespace,
-					-- Remove trailing whitespace without 'sed'
-					-- require("formatter.filetypes.any").substitute_trailing_whitespace,
-				},
-			},
-		})
+        -- Use the special "*" filetype for defining formatter configurations on
+        -- any filetype
+        ["*"] = {
+          -- "formatter.filetypes.any" defines default configurations for any
+          -- filetype
+          require("formatter.filetypes.any").remove_trailing_whitespace,
+          -- Remove trailing whitespace without 'sed'
+          -- require("formatter.filetypes.any").substitute_trailing_whitespace,
+        },
+      },
+    })
 
-		vim.api.nvim_create_autocmd("BufWritePost", {
-			callback = function()
-				if not vim.b.disable_autoformat then
-					vim.cmd("FormatWrite")
-				end
-			end,
-		})
-	end,
+    vim.api.nvim_create_autocmd("BufWritePost", {
+      callback = function()
+        if not vim.b.disable_autoformat then
+          vim.cmd("FormatWrite")
+        end
+      end,
+    })
+  end,
 }

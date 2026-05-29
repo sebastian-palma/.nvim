@@ -17,7 +17,6 @@
 -- 	end,
 -- }
 
-
 return {
   "catppuccin/nvim",
   name = "catppuccin",
@@ -34,10 +33,9 @@ return {
     })
 
     -- vim.cmd.colorscheme "catppuccin"
-    vim.cmd.colorscheme "catppuccin-latte"
+    -- vim.cmd.colorscheme("catppuccin-latte")
     -- vim.cmd.colorscheme "catppuccin-frappe"
-    -- vim.cmd.colorscheme "catppuccin-macchiato"
+    vim.cmd.colorscheme("catppuccin-macchiato")
     -- vim.cmd.colorscheme "catppuccin-mocha"
-
-  end
+  end,
 }

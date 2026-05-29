@@ -1,3 +1,3 @@
 return {
-	"guns/vim-sexp",
+  "guns/vim-sexp",
 }
