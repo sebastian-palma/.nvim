@@ -53,19 +53,21 @@ vim.api.nvim_set_keymap("n", "<leader>cn", ":cn<enter>", { noremap = true, silen
 vim.api.nvim_set_keymap("n", "<leader>cp", ":cp<enter>", { noremap = true, silent = true })
 
 -- Renders linter messages as virtual text, otherwise you see only the gutter.
-vim.diagnostic.config({virtual_text = true})
+vim.diagnostic.config({ virtual_text = true })
 
 -- EasyAlign mappings for Lisp.
-vim.api.nvim_set_keymap('n', '<leader>a[', 'vi[<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>a{', 'vi{<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>a[", "vi[<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>a{", "vi{<c-v>$:EasyAlign\\ g/^\\S/<cr>gv=", { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd({ "BufUnload", "BufWinLeave" }, {
-  pattern = "?*",  -- ?* = named files only, avoids errors on scratch buffers
-  command = "silent! mkview",
+	pattern = "?*", -- ?* = named files only, avoids errors on scratch buffers
+	command = "silent! mkview",
 })
 
 -- Restore view: covers :e! (BufReadPost) and entering windows (BufWinEnter)
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufWinEnter" }, {
-  pattern = "?*",
-  command = "silent! loadview",
+	pattern = "?*",
+	command = "silent! loadview",
 })
+
+vim.b.disable_autoformat = true -- see formatting.lua
