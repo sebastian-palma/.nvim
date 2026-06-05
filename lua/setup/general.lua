@@ -70,4 +70,10 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWinEnter" }, {
   command = "silent! loadview",
 })
 
-vim.b.disable_autoformat = true -- see formatting.lua
+vim.g.disable_autoformat = true -- set to false to re-enable autoformat on save
+
+vim.api.nvim_create_user_command("CopyRelativePath", function()
+  local path = vim.fn.expand("%:.")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path)
+end, {})

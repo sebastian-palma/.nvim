@@ -103,7 +103,7 @@ return {
 
     vim.api.nvim_create_autocmd("BufWritePost", {
       callback = function()
-        if not vim.b.disable_autoformat then
+        if not vim.g.disable_autoformat and not vim.b.disable_autoformat then
           vim.cmd("FormatWrite")
         end
       end,
