@@ -70,10 +70,21 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWinEnter" }, {
   command = "silent! loadview",
 })
 
-vim.g.disable_autoformat = true -- set to false to re-enable autoformat on save
+vim.b.disable_autoformat = true -- Use EnableFormatting to toggle this.
+vim.g.disable_autoformat = true -- Use EnableFormatting to toggle this.
 
 vim.api.nvim_create_user_command("CopyRelativePath", function()
   local path = vim.fn.expand("%:.")
   vim.fn.setreg("+", path)
   vim.notify("Copied: " .. path)
+end, {})
+
+vim.api.nvim_create_user_command("DisableFormatting", function()
+  vim.b.disable_autoformat = true
+  vim.g.disable_autoformat = true
+end, {})
+
+vim.api.nvim_create_user_command("EnableFormatting", function()
+  vim.b.disable_autoformat = nil
+  vim.g.disable_autoformat = nil
 end, {})
