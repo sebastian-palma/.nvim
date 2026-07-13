@@ -162,11 +162,19 @@ return {
       },
     })
 
-    vim.lsp.config("clangd", {
-      cmd = { "docker", "exec", "-i", "df-compressor", "clangd", "--clang-tidy" },
+    lspconfig["clangd"].setup({
+      cmd = {
+        "docker",
+        "exec",
+        "-i",
+        "df-compressor",
+        "clangd-20",
+        "--clang-tidy",
+        "--path-mappings=/Users/seb/code/df/df_compressor=/app",
+        "--compile-commands-dir=/app",
+      },
       on_attach = on_attach,
       capabilities = capabilities,
     })
-    vim.lsp.enable("clangd")
   end,
 }

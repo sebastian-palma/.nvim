@@ -24,7 +24,7 @@ return {
       -- list of servers for mason to install
       ensure_installed = {
         "clojure_lsp",
-        "clangd",
+        -- "clangd",
         "lua_ls",
         "tailwindcss",
       },

@@ -16,8 +16,8 @@ vim.api.nvim_set_keymap("n", "*", "*``", { noremap = true })
 
 -- easy debugging snippet
 vim.cmd([[autocmd FileType python     inoremap <C-v> import ipdb; ipdb.set_trace()]])
-vim.cmd([[autocmd FileType ruby       inoremap <C-v> binding.pry]])
-vim.cmd([[autocmd FileType eruby      inoremap <C-v> <% binding.pry %>]])
+vim.cmd([[autocmd FileType ruby       inoremap <C-v> binding.irb]])
+vim.cmd([[autocmd FileType eruby      inoremap <C-v> <% binding.irb %>]])
 vim.cmd([[autocmd FileType javascript inoremap <C-v> debugger]])
 
 vim.opt.splitright = true

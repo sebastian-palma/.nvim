@@ -15,15 +15,27 @@ return {
       }
     end
 
+    local oxfmt_docker = function()
+      return {
+        exe = "docker",
+        args = { "compose", "exec", "-T", "app", "npx", "oxfmt", "--stdin-filepath",
+          util.escape_path(util.get_current_buffer_file_path()), "-" },
+        stdin = true,
+      }
+    end
+
     local javascript_formatter = function()
       local cwd = vim.fn.getcwd()
       local df = "/df"
       local glbtosvg = "/3d-glbtosvg"
+      local dfCompressor = "/df_compressor"
 
       if cwd:sub(-#df) == df then
         return javascript.eslint_d
       elseif cwd:sub(-#glbtosvg) == glbtosvg then
         return javascript.prettier
+      elseif cwd:sub(-#dfCompressor) == dfCompressor then
+        return oxfmt_docker
       else
         return javascript.standard
       end

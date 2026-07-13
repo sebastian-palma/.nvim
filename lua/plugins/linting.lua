@@ -5,23 +5,31 @@ return {
   config = function()
     local lint = require("lint")
     local df = "/df"
+    local dfCompressor = "/df_compressor"
+    local cwd = vim.fn.getcwd()
 
     lint.linters_by_ft = {
       clojure = { "clj-kondo" },
       python = { "ruff" },
       ruby = { "standardrb" },
-      c = { "cppcheck" },
-      cpp = { "cppcheck" },
+      -- c = { "cppcheck" },
+      -- cpp = { "cppcheck" },
     }
 
-    local cppcheck = lint.linters.cppcheck
-    cppcheck.cmd = "docker"
-    cppcheck.args = vim.list_extend({ "exec", "-i", "df-compressor", "cppcheck" }, cppcheck.args)
+    -- local cppcheck = lint.linters.cppcheck
+    -- cppcheck.cmd = "docker"
+    -- cppcheck.args = vim.list_extend({ "exec", "-i", "df-compressor", "cppcheck" }, cppcheck.args)
 
     -- Configure linters per project.
-    if vim.fn.getcwd():sub(-#df) == df then
+    if cwd:sub(-#df) == df then
       lint.linters_by_ft.javascript = { "eslint_d" }
       lint.linters_by_ft.javascriptreact = { "eslint_d" }
+    elseif cwd:sub(-#dfCompressor) == dfCompressor then
+      local oxlint = lint.linters.oxlint
+      oxlint.cmd = "docker"
+      oxlint.args = vim.list_extend({ "compose", "exec", "-T", "app", "npx", "oxlint" }, oxlint.args)
+      lint.linters_by_ft.javascript = { "oxlint" }
+      lint.linters_by_ft.javascriptreact = { "oxlint" }
     else
       lint.linters_by_ft.javascript = { "standardjs" }
       lint.linters_by_ft.javascriptreact = { "standardjs" }
