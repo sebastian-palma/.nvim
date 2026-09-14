@@ -160,29 +160,31 @@ local rust = {
     cmd = ":RustRun<cr>",
   },
 }
-function TelescopeGrepWithHighlight()
-  -- Get the current visual selection or word under cursor
-  local function get_search_term()
-    local mode = vim.fn.mode()
+-- Get the current visual selection or word under cursor
+local function get_search_term()
+  local mode = vim.fn.mode()
 
-    -- If in visual mode, get the visual selection
-    if mode == "v" or mode == "V" or mode == "" then
-      -- Exit visual mode first
-      vim.cmd('normal! "vy')
+  -- If in visual mode, get the visual selection
+  if mode == "v" or mode == "V" or mode == "" then
+    -- Exit visual mode first
+    vim.cmd('normal! "vy')
 
-      -- Get the visual selection
-      local selection = vim.fn.getreg("v")
+    -- Get the visual selection
+    local selection = vim.fn.getreg("v")
 
-      -- Clear the register
-      vim.fn.setreg("v", "")
+    -- Clear the register
+    vim.fn.setreg("v", "")
 
-      return selection
-    else
-      -- If not in visual mode, get the word under cursor
-      -- Use expand with modifiers to get the full word
-      return vim.fn.expand("<cword>")
-    end
+    return selection
+  else
+    -- If not in visual mode, get the word under cursor
+    -- Use expand with modifiers to get the full word
+    return vim.fn.expand("<cword>")
   end
+end
+
+local function telescope_grep_with_highlight(opts)
+  opts = opts or {}
 
   -- Get the search term
   local search_term = get_search_term()
@@ -201,8 +203,23 @@ function TelescopeGrepWithHighlight()
         mirror = true,
       },
     },
+    additional_args = opts.additional_args,
   })
 end
+
+function TelescopeGrepWithHighlight()
+  telescope_grep_with_highlight()
+end
+
+-- Same as TelescopeGrepWithHighlight but excludes matches under spec/
+function TelescopeGrepWithHighlightNoSpec()
+  telescope_grep_with_highlight({
+    additional_args = function()
+      return { "--glob", "!spec/**" }
+    end,
+  })
+end
+vim.api.nvim_create_user_command("TelescopeGrepWithHighlightNoSpec", TelescopeGrepWithHighlightNoSpec, {})
 local telescope = {
   {
     desc = "Open Telescope",
