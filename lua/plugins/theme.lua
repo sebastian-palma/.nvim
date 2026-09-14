@@ -20,22 +20,13 @@
 return {
   "catppuccin/nvim",
   name = "catppuccin",
+  lazy = false,
   priority = 1000,
-  config = function()
-    local catppuccin = require("catppuccin")
-
-    catppuccin.setup({
-      flavour = "latte",
-      background = { -- :h background
-        light = "latte",
-        dark = "mocha",
-      },
-    })
-
-    -- vim.cmd.colorscheme "catppuccin"
-    -- vim.cmd.colorscheme("catppuccin-latte")
-    -- vim.cmd.colorscheme "catppuccin-frappe"
-    vim.cmd.colorscheme("catppuccin-macchiato")
-    -- vim.cmd.colorscheme "catppuccin-mocha"
+  opts = {
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
+  },
+  config = function(_, opts)
+    require("catppuccin").setup(opts)
+    vim.cmd.colorscheme "catppuccin"
   end,
 }

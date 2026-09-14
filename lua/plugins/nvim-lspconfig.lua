@@ -6,9 +6,6 @@ return {
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   config = function()
-    -- import lspconfig plugin
-    local lspconfig = require("lspconfig")
-    local util = require("lspconfig/util")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local keymap = vim.keymap -- for conciseness
 
@@ -61,16 +58,22 @@ return {
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     -- Change the Diagnostic symbols in the sign column (gutter)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    -- fennel-ls does not seem to recognize globals
-    lspconfig.fennel_ls.setup({})
+    -- defaults applied to every server config below
+    vim.lsp.config("*", {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
 
-    lspconfig.ruby_lsp.setup({
+    -- fennel-ls does not seem to recognize globals
+    vim.lsp.config("fennel_ls", {})
+
+    vim.lsp.config("ruby_lsp", {
       init_options = {
         addonSettings = {
           ["Ruby LSP Rails"] = {
@@ -83,48 +86,32 @@ return {
     })
 
     -- configure clojure server
-    lspconfig["clojure_lsp"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    vim.lsp.config("clojure_lsp", {})
 
     -- configure html server
-    lspconfig["html"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    vim.lsp.config("html", {})
 
     -- configure typescript server with plugin
-    lspconfig["ts_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    vim.lsp.config("ts_ls", {})
 
     -- configure prisma orm server
-    lspconfig["prismals"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    vim.lsp.config("prismals", {})
 
-    -- configure ruff_lsp language server
-    lspconfig["ruff"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
+    -- configure tailwindcss server (tailwind-tools.nvim has server.override = false)
+    vim.lsp.config("tailwindcss", {})
+
+    -- configure ruff language server
+    vim.lsp.config("ruff", {
       filetypes = { "python" },
     })
 
     -- configure lua server (with special settings)
-    lspconfig["lua_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    vim.lsp.config("lua_ls", {})
 
-    lspconfig["gopls"].setup({
-      capabilities = capabilities,
+    vim.lsp.config("gopls", {
       cmd = { "gopls" },
       filetypes = { "go", "gomod", "gowork", "gotmpl" },
-      on_attach = on_attach,
-      root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+      root_markers = { "go.work", "go.mod", ".git" },
       settings = {
         gopls = {
           analyses = {
@@ -136,9 +123,7 @@ return {
       },
     })
 
-    lspconfig["dartls"].setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
+    vim.lsp.config("dartls", {
       cmd = {
         "dart",
         "language-server",
@@ -162,7 +147,7 @@ return {
       },
     })
 
-    lspconfig["clangd"].setup({
+    vim.lsp.config("clangd", {
       cmd = {
         "docker",
         "exec",
@@ -173,8 +158,21 @@ return {
         "--path-mappings=/Users/seb/code/df/df_compressor=/app",
         "--compile-commands-dir=/app",
       },
-      on_attach = on_attach,
-      capabilities = capabilities,
+    })
+
+    vim.lsp.enable({
+      "fennel_ls",
+      "ruby_lsp",
+      "clojure_lsp",
+      "html",
+      "ts_ls",
+      "prismals",
+      "tailwindcss",
+      "ruff",
+      "lua_ls",
+      "gopls",
+      "dartls",
+      "clangd",
     })
   end,
 }
